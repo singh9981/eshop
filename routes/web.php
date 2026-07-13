@@ -12,7 +12,7 @@ use App\Http\Controllers\SuperAdmin\SuperAdminCategoryController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
+dd('sdfdsf');
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Auth::routes();

@@ -9,6 +9,7 @@ class WelcomeController extends Controller
 {
     public function index()
     {
+        
         if (Auth::check() === true) {
             if (Auth::check() && Auth::user()->role === 'super_admin') {
                 return redirect()->route('super.admin.dashboard')
