@@ -25,6 +25,7 @@ Route::prefix('super-admin')->middleware(['auth','role:super_admin'])->group(fun
     // Category
     Route::get('/category',[SuperAdminCategoryController::class,'index'])->name('super.admin.category');
     Route::get('/category/create',[SuperAdminCategoryController::class,'create'])->name('super.admin.create');
+    Route::post('/category/store',[SuperAdminCategoryController::class,'store'])->name('super.admin.store');
     
 });
 
