@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,18 +28,20 @@
     <link rel="stylesheet" type="text/css" href="{{asset('superadmin/vendors/css/tagify.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('superadmin/vendors/css/tagify-data.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('superadmin/vendors/css/quill.min.css')}}" />
+    
 
 
     <!-- Scripts -->
     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
 </head>
+
 <body>
     @if(session('warning'))
-    <div id="alert-box" 
-         class="alert alert-warning alert-dismissible fade show"
-         style="position: fixed; top: 20px; right: 20px; min-width: 300px; z-index: 9999;"
-         role="alert">
-         
+    <div id="alert-box"
+        class="alert alert-warning alert-dismissible fade show"
+        style="position: fixed; top: 20px; right: 20px; min-width: 300px; z-index: 9999;"
+        role="alert">
+
         {{ session('warning') }}
 
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -46,7 +49,7 @@
 
     <script>
         // Auto hide after 3 minutes (180000 ms)
-        setTimeout(function () {
+        setTimeout(function() {
             let alertBox = document.getElementById('alert-box');
             if (alertBox) {
                 alertBox.classList.remove('show');
@@ -54,11 +57,11 @@
             }
         }, 180000);
     </script>
-@endif
+    @endif
     <div id="app">
-    @include('layouts.superadmin.sidebar')
+        @include('layouts.superadmin.sidebar')
 
-    @include('layouts.superadmin.header')
+        @include('layouts.superadmin.header')
 
         <main class="py-0">
             @yield('content')
@@ -262,7 +265,7 @@
     </div>
     <!-- jklfjlgkfdsfg -->
 
-     <div class="modal fade-scale" id="languageSelectModal" aria-hidden="true" aria-labelledby="languageSelectModalLabel" tabindex="-1">
+    <div class="modal fade-scale" id="languageSelectModal" aria-hidden="true" aria-labelledby="languageSelectModalLabel" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -444,7 +447,7 @@
     </div>
     <!-- thems -->
 
-     <div class="theme-customizer">
+    <div class="theme-customizer">
         <div class="customizer-handle">
             <a href="javascript:void(0);" class="cutomizer-open-trigger bg-primary">
                 <i class="feather-settings"></i>
@@ -609,7 +612,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="{{asset('superadmin/vendors/js/vendors.min.js')}}"></script>
     <script src="{{asset('superadmin/vendors/js/daterangepicker.min.js')}}"></script>
     <script src="{{asset('superadmin/vendors/js/apexcharts.min.js')}}"></script>
@@ -618,7 +621,7 @@
     <script src="{{asset('superadmin/js/common-init.min.js')}}"></script>
     <script src="{{asset('superadmin/js/dashboard-init.min.js')}}"></script>
     <script src="{{asset('superadmin/js/theme-customizer-init.min.js')}}"></script>
-    
+
     <script src="{{asset('superadmin/vendors/js/dataTables.min.js')}}"></script>
     <script src="{{asset('superadmin/vendors/js/dataTables.bs5.min.js')}}"></script>
     <script src="{{asset('superadmin/vendors/js/select2.min.js')}}"></script>
@@ -631,6 +634,27 @@
 
     <script src="{{asset('superadmin/js/proposal-init.min.js')}}"></script>
 
+    <script>
+        $(function() {
+            $('#category_name').on('keyup', function() {
+
+                let slug = $(this).val()
+                    .toLowerCase()
+                    .trim()
+                    .replace(/&/g, 'and')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .replace(/^-|-$/g, '');
+
+                $('#slug').val(slug);
+
+            });
+
+        });
+    </script>
+
 
 </body>
+
 </html>

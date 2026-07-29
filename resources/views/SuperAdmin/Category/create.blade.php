@@ -97,16 +97,9 @@
                                     <div class="col-md-6">
                                         <div class="mb-4">
                                             <label class="form-label">Category <span class="text-danger">*</span></label>
-                                            <select
-                                                class="form-control @error('status') is-invalid @enderror"
-                                                name="status">
-                                                <option value="1" @selected(old('status', '1' )=='1' )>
-                                                    Active
-                                                </option>
-
-                                                <option value="0" @selected(old('status')=='0' )>
-                                                    Inactive
-                                                </option>
+                                            <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                                <option value="1" @selected(old('status', '1' )=='1' )> Active </option>
+                                                <option value="0" @selected(old('status')=='0' )> Inactive </option>
                                             </select>
                                         </div>
                                     </div>
@@ -158,26 +151,5 @@
     </footer>
     <!-- [ Footer ] end -->
 </main>
-@push('scripts')
-<script>
-    $(function () {
 
-        $('#category_name').on('keyup', function () {
-
-            let slug = $(this).val()
-                .toLowerCase()
-                .trim()
-                .replace(/&/g, 'and')
-                .replace(/[^a-z0-9\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-')
-                .replace(/^-|-$/g, '');
-
-            $('#slug').val(slug);
-
-        });
-
-    });
-</script>
-@endpush
 @endsection

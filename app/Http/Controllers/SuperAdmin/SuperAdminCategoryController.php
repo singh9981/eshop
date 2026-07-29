@@ -22,7 +22,7 @@ class SuperAdminCategoryController extends Controller
     public function index(): View
     {
         $categories = $this->categoryService->getAllCategories();
-
+        
         return view('SuperAdmin.Category.list', compact('categories'));
     }
 
@@ -86,9 +86,9 @@ class SuperAdminCategoryController extends Controller
      */
     public function edit(Category $category): View
     {
-        $parentCategories = $this->categoryService->getParentCategories($category->id);
-
-        return view('SuperAdmin.Category.edit', compact('category', 'parentCategories'));
+        $parentCategoriesEdit = $this->categoryService->getCategoryById($category->id);
+        $parentCategories = $this->categoryService->getParentCategories();
+        return view('SuperAdmin.Category.edit', compact('category', 'parentCategoriesEdit','parentCategories'));
     }
 
     /**

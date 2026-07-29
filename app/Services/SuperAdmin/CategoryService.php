@@ -36,7 +36,11 @@ class CategoryService
             ->orderBy('category_name')
             ->get();
     }
-
+    public function getCategoryById(int $id)
+    {
+       
+        return Category::findOrFail($id);
+    }
     /**
      * Parent aur nested child categories.
      */
@@ -167,11 +171,11 @@ class CategoryService
 
         while (
             Category::query()
-                ->where('slug', $slug)
-                ->when($ignoreId, function ($query) use ($ignoreId) {
-                    $query->where('id', '!=', $ignoreId);
-                })
-                ->exists()
+            ->where('slug', $slug)
+            ->when($ignoreId, function ($query) use ($ignoreId) {
+                $query->where('id', '!=', $ignoreId);
+            })
+            ->exists()
         ) {
             $slug = $baseSlug . '-' . $counter;
             $counter++;
