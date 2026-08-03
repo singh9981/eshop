@@ -4,7 +4,7 @@ name: Deploy to Hostinger
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -12,14 +12,14 @@ jobs:
 
     steps:
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.2.0
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd public_html/shop
+            cd ~/public_html/shop
             git pull origin main
             composer install --no-interaction --prefer-dist --optimize-autoloader
             php artisan optimize
