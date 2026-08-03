@@ -12,6 +12,7 @@ class Category extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'id',
         'parent_id',
         'category_name',
         'slug',

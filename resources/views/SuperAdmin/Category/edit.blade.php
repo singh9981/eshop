@@ -29,8 +29,9 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card stretch stretch-full">
-                        <form action="{{ route('super.admin.update') }}" method="put" enctype="multipart/form-data">
+                        <form action="{{ route('super.admin.update') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                             @method('PUT')
                             <input type="hidden" name="id" value="{{ $parentCategoriesEdit->id ?? '' }}">
                             <div class="card-body">
                                 <div class="row">
@@ -63,7 +64,7 @@
                                                 <option value="">Main Category</option>
                                                 @foreach ($parentCategories as $parentCategory)
                                                 <option value="{{ $parentCategory->id }}"
-                                                    @selected(old('parent_id', $category->parent_id) == $parentCategory->id)>
+                                                    @selected(old('parent_id', $parentCategoriesEdit->parent_id) == $parentCategory->id)>
                                                     {{ $parentCategory->category_name }}
                                                 </option>
                                                 @endforeach
@@ -74,18 +75,30 @@
                                         <div class="mb-4">
                                             <label class="form-label">Category <span class="text-danger">*</span></label>
                                             <select class="form-control @error('status') is-invalid @enderror" name="status">
-                                                <option value="1" @selected(old('status', '1' )=='1' )> Active </option>
-                                                <option value="0" @selected(old('status')=='0' )> Inactive </option>
+                                                <option value="1" @selected(old('status', $parentCategoriesEdit->status )=='1' )> Active </option>
+                                                <option value="0" @selected(old('status', $parentCategoriesEdit->status)=='0' )> Inactive </option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-4">
-                                    <label class="form-label">Image<span class="text-danger">*</span></label>
-                                    <input
-                                        type="file"
-                                        name="image"
-                                        class="form-control @error('image') is-invalid @enderror">
+                                <div class="row">
+                                    <div class="col-md-{{ !empty($parentCategoriesEdit->image) ? 6 : 12}}">
+                                        <div class="mb-4">
+                                            <label class="form-label">Image<span class="text-danger">*</span></label>
+                                            <input
+                                                type="file"
+                                                name="image"
+                                                class="form-control @error('image') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                    @if(!empty($parentCategoriesEdit->image))
+                                    <div class="col-md-6">
+                                        <div class="mb-4">
+                                            <label class="form-label">Image<span class="text-danger">*</span></label>
+                                            <img src="{{ asset('storage/' . $parentCategoriesEdit->image) }}" alt="" width="100" height="100">
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label">Meta Title<span class="text-danger">*</span></label>
@@ -100,7 +113,7 @@
                                     <input type="text" name="meta_keywords" class="form-control" placeholder="Meta Keyword" value="{{ $parentCategoriesEdit->meta_keywords ?? '' }}">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="submit" value="Submit" class="btn btn-primary">
+                                    <input type="submit" value="Update" class="btn btn-primary">
                                 </div>
                         </form>
                     </div>
@@ -123,7 +136,7 @@
             <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Help</a>
             <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Terms</a>
             <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Privacy</a>
-        </div> 
+        </div>
     </footer>
     <!-- [ Footer ] end -->
 </main>

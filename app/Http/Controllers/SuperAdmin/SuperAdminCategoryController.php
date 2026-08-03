@@ -22,7 +22,7 @@ class SuperAdminCategoryController extends Controller
     public function index(): View
     {
         $categories = $this->categoryService->getAllCategories();
-        
+
         return view('SuperAdmin.Category.list', compact('categories'));
     }
 
@@ -59,7 +59,7 @@ class SuperAdminCategoryController extends Controller
                 'category_name' => $category->categorys_name,
             ]);
 
-                
+
             return redirect()
                 ->route('super.admin.category')
                 ->with(
@@ -69,7 +69,7 @@ class SuperAdminCategoryController extends Controller
         } catch (Throwable $exception) {
             report($exception);
 
-            return back()->withInput()->with('error','Category could not be created.');
+            return back()->withInput()->with('error', 'Category could not be created.');
         }
     }
 
@@ -88,7 +88,7 @@ class SuperAdminCategoryController extends Controller
     {
         $parentCategoriesEdit = $this->categoryService->getCategoryById($category->id);
         $parentCategories = $this->categoryService->getParentCategories();
-        return view('SuperAdmin.Category.edit', compact('category', 'parentCategoriesEdit','parentCategories'));
+        return view('SuperAdmin.Category.edit', compact('category', 'parentCategoriesEdit', 'parentCategories'));
     }
 
     /**
@@ -97,10 +97,10 @@ class SuperAdminCategoryController extends Controller
     public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         try {
-            $this->categoryService->updateCategory(
-                $category,
-                $request->validated()
-            );
+            // dd($request->all(),$category
+            // );
+            $category = Category::findOrFail($request->id);
+            $this->categoryService->updateCategory($category, $request->validated());
 
             return redirect()
                 ->route('super.admin.category')
@@ -110,7 +110,7 @@ class SuperAdminCategoryController extends Controller
                 );
         } catch (Throwable $exception) {
             report($exception);
-
+            Log::info("check the");
             return back()
                 ->withInput()
                 ->with(

@@ -28,6 +28,10 @@ Route::prefix('super-admin')->middleware(['auth','role:super_admin'])->group(fun
     Route::post('/category/store',[SuperAdminCategoryController::class,'store'])->name('super.admin.store');
     Route::get('/category/{category}/edit',[SuperAdminCategoryController::class,'edit'])->name('super.admin.edit');
     Route::put('/category/update',[SuperAdminCategoryController::class,'update'])->name('super.admin.update');
+    Route::delete('/category/delete/{category}',[SuperAdminCategoryController::class,'destroy'])->name('super.admin.destroy');
+    
+    // Brand
+    
     
 });
 

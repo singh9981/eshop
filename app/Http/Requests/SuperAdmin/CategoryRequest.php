@@ -14,9 +14,17 @@ class CategoryRequest extends FormRequest
 
     public function rules(): array
     {
-        $categoryId = $this->route('category')?->id
-            ?? $this->route('category');
-    
+        // $categoryId = $this->route('category')?->id
+        //     ?? $this->route('category');
+
+        // $category = $this->route('category');
+            $categoryId = $this->input('id');
+
+
+    // $categoriesId = $category instanceof \App\Models\Category
+    //     ? $category->id
+    //     : $category;
+    //     dd($this->input('id'),$categoryId);
         return [
             'parent_id' => [
                 'nullable',
@@ -35,7 +43,7 @@ class CategoryRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('categories', 'slug')->ignore($categoryId),
+                Rule::unique('categories', 'slug')->ignore($categoryId, 'id'),
             ],
 
             'description' => [

@@ -38,7 +38,7 @@ class CategoryService
     }
     public function getCategoryById(int $id)
     {
-       
+
         return Category::findOrFail($id);
     }
     /**
@@ -88,10 +88,8 @@ class CategoryService
      *
      * @throws Throwable
      */
-    public function updateCategory(
-        Category $category,
-        array $data
-    ): Category {
+    public function updateCategory(Category $category, array $data): Category
+    {
         return DB::transaction(function () use ($category, $data) {
 
             if (
@@ -103,10 +101,7 @@ class CategoryService
                 );
             }
 
-            $data['slug'] = $this->generateUniqueSlug(
-                $data['slug'] ?? $data['category_name'],
-                $category->id
-            );
+            $data['slug'] = $this->generateUniqueSlug($data['slug'] ?? $data['category_name'], $category->id);
 
             if (
                 isset($data['image']) &&
