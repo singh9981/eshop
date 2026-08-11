@@ -86,7 +86,7 @@
                         <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.category') }}">List</a>
                         </li>
                         <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.create') }}">Create /
-                                Add</a></li>
+                                Add</a></li> 
                     </ul>
                 </li>
                 <li class="nxl-item nxl-hasmenu">
