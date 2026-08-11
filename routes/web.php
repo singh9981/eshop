@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SuperAdmin\SuperAdminBrandController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\User\UserProductController;
 use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\SuperAdmin\SuperAdminDashboardController;
 use App\Http\Controllers\SuperAdmin\SuperAdminCategoryController;
+use App\Http\Controllers\SuperAdmin\SuperAdminSizeController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -31,7 +33,17 @@ Route::prefix('super-admin')->middleware(['auth','role:super_admin'])->group(fun
     Route::delete('/category/delete/{category}',[SuperAdminCategoryController::class,'destroy'])->name('super.admin.destroy');
     
     // Brand
-    
+    Route::get('/brand',[SuperAdminBrandController::class,'index'])->name('super.admin.brand');
+    Route::get('/brand/create',[SuperAdminBrandController::class,'create'])->name('super.admin.brand.create');
+    Route::post('/brand/store',[SuperAdminBrandController::class,'store'])->name('super.admin.brand.store');
+    Route::get('/brand/{brand}/edit',[SuperAdminBrandController::class,'edit'])->name('super.admin.brand.edit');
+    Route::put('/brand/update',[SuperAdminBrandController::class,'update'])->name('super.admin.brand.update');
+    Route::delete('/brand/delete/{brand}',[SuperAdminBrandController::class,'destroy'])->name('super.admin.brand.destroy');
+
+    //Size
+    Route::get('/size',[SuperAdminSizeController::class,'index'])->name('super.admin.size');
+    Route::get('/size/create',[SuperAdminSizeController::class,'create'])->name('super.admin.size.create');
+    Route::post('/size/store',[SuperAdminSizeController::class,'store'])->name('super.admin.size.store');
     
 });
 

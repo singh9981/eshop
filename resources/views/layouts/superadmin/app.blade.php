@@ -636,7 +636,7 @@
 
     <script>
         $(function() {
-            $('#category_name').on('keyup', function() {
+            $('#category_name, #brand_name, #size_name').on('keyup', function() {
 
                 let slug = $(this).val()
                     .toLowerCase()

@@ -6,39 +6,13 @@
         <div class="page-header">
             <div class="page-header-left d-flex align-items-center">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Category</h5>
+                    <h5 class="m-b-10">Brand</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item">Create</li>
                 </ul>
             </div>
-            <!-- <div class="page-header-right ms-auto">
-                <div class="page-header-right-items">
-                    <div class="d-flex d-md-none">
-                        <a href="javascript:void(0)" class="page-header-right-close-toggle">
-                            <i class="feather-arrow-left me-2"></i>
-                            <span>Back</span>
-                        </a>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
-                        <a href="javascript:void(0);" class="btn btn-light-brand" data-bs-toggle="offcanvas"
-                            data-bs-target="#proposalSent">
-                            <i class="feather-layers me-2"></i>
-                            <span>Save & Send</span>
-                        </a>
-                        <a href="javascript:void(0);" class="btn btn-primary successAlertMessage">
-                            <i class="feather-save me-2"></i>
-                            <span>Save</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="d-md-none d-flex align-items-center">
-                    <a href="javascript:void(0)" class="page-header-right-open-toggle">
-                        <i class="feather-align-right fs-20"></i>
-                    </a>
-                </div>
-            </div> -->
         </div>
         <!-- [ page-header ] end -->
         <!-- [ Main Content ] start -->
@@ -57,19 +31,19 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card stretch stretch-full">
-                        <form action="{{ route('super.admin.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('super.admin.brand.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-4">
-                                            <label class="form-label">Category <span class="text-danger">*</span></label>
+                                            <label class="form-label">Brand <span class="text-danger">*</span></label>
                                             <input type="text"
-                                                name="category_name"
-                                                id="category_name"
-                                                value="{{ old('category_name') }}"
-                                                class="form-control @error('category_name') is-invalid @enderror"
-                                                placeholder="Category">
+                                                name="brand_name"
+                                                id="brand_name"
+                                                value="{{ old('brand_name') }}"
+                                                class="form-control @error('brand_name') is-invalid @enderror"
+                                                placeholder="Brand">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -85,18 +59,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-4">
-                                            <label class="form-label">Sub Category <span class="text-danger">*</span></label>
-                                            <select class="form-control" data-select2-selector="icon" name="parent_id">
-                                                <option value="">Main Category</option>
-                                                @foreach ($parentCategories as $parentCategory)
-                                                <option value="{{ $parentCategory->id }}" @selected(old( 'parent_id' , $category->parent_id ?? null ) == $parentCategory->id)>{{ $parentCategory->category_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-4">
-                                            <label class="form-label">Category <span class="text-danger">*</span></label>
+                                            <label class="form-label">Brand Status <span class="text-danger">*</span></label>
                                             <select class="form-control @error('status') is-invalid @enderror" name="status">
                                                 <option value="1" @selected(old('status', '1' )=='1' )> Active </option>
                                                 <option value="0" @selected(old('status')=='0' )> Inactive </option>
@@ -108,7 +71,7 @@
                                     <label class="form-label">Image<span class="text-danger">*</span></label>
                                     <input
                                         type="file"
-                                        name="image"
+                                        name="logo"
                                         class="form-control @error('image') is-invalid @enderror">
                                 </div>
                                 <div class="mb-4">

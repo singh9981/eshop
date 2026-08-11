@@ -6,42 +6,14 @@
         <div class="page-header">
             <div class="page-header-left d-flex align-items-center">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Category</h5>
+                    <h5 class="m-b-10">Proposal</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item">Create</li>
                 </ul>
             </div>
-            <!-- <div class="page-header-right ms-auto">
-                <div class="page-header-right-items">
-                    <div class="d-flex d-md-none">
-                        <a href="javascript:void(0)" class="page-header-right-close-toggle">
-                            <i class="feather-arrow-left me-2"></i>
-                            <span>Back</span>
-                        </a>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
-                        <a href="javascript:void(0);" class="btn btn-light-brand" data-bs-toggle="offcanvas"
-                            data-bs-target="#proposalSent">
-                            <i class="feather-layers me-2"></i>
-                            <span>Save & Send</span>
-                        </a>
-                        <a href="javascript:void(0);" class="btn btn-primary successAlertMessage">
-                            <i class="feather-save me-2"></i>
-                            <span>Save</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="d-md-none d-flex align-items-center">
-                    <a href="javascript:void(0)" class="page-header-right-open-toggle">
-                        <i class="feather-align-right fs-20"></i>
-                    </a>
-                </div>
-            </div> -->
         </div>
-        <!-- [ page-header ] end -->
-        <!-- [ Main Content ] start -->
         <div class="main-content">
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -57,8 +29,10 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card stretch stretch-full">
-                        <form action="{{ route('super.admin.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('super.admin.update') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $parentCategoriesEdit->id ?? '' }}">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -67,7 +41,7 @@
                                             <input type="text"
                                                 name="category_name"
                                                 id="category_name"
-                                                value="{{ old('category_name') }}"
+                                                value="{{ old('category_name', $parentCategoriesEdit->category_name ?? '') }}"
                                                 class="form-control @error('category_name') is-invalid @enderror"
                                                 placeholder="Category">
                                         </div>
@@ -78,7 +52,7 @@
                                             <input type="text"
                                                 name="slug"
                                                 id="slug"
-                                                value="{{ old('slug') }}"
+                                                value="{{ old('slug',$parentCategoriesEdit->slug ?? '') }}"
                                                 class="form-control @error('slug') is-invalid @enderror"
                                                 placeholder="slug">
                                         </div>
@@ -89,7 +63,10 @@
                                             <select class="form-control" data-select2-selector="icon" name="parent_id">
                                                 <option value="">Main Category</option>
                                                 @foreach ($parentCategories as $parentCategory)
-                                                <option value="{{ $parentCategory->id }}" @selected(old( 'parent_id' , $category->parent_id ?? null ) == $parentCategory->id)>{{ $parentCategory->category_name }}</option>
+                                                <option value="{{ $parentCategory->id }}"
+                                                    @selected(old('parent_id', $parentCategoriesEdit->parent_id) == $parentCategory->id)>
+                                                    {{ $parentCategory->category_name }}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -98,33 +75,45 @@
                                         <div class="mb-4">
                                             <label class="form-label">Category <span class="text-danger">*</span></label>
                                             <select class="form-control @error('status') is-invalid @enderror" name="status">
-                                                <option value="1" @selected(old('status', '1' )=='1' )> Active </option>
-                                                <option value="0" @selected(old('status')=='0' )> Inactive </option>
+                                                <option value="1" @selected(old('status', $parentCategoriesEdit->status )=='1' )> Active </option>
+                                                <option value="0" @selected(old('status', $parentCategoriesEdit->status)=='0' )> Inactive </option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-4">
-                                    <label class="form-label">Image<span class="text-danger">*</span></label>
-                                    <input
-                                        type="file"
-                                        name="image"
-                                        class="form-control @error('image') is-invalid @enderror">
+                                <div class="row">
+                                    <div class="col-md-{{ !empty($parentCategoriesEdit->image) ? 6 : 12}}">
+                                        <div class="mb-4">
+                                            <label class="form-label">Image<span class="text-danger">*</span></label>
+                                            <input
+                                                type="file"
+                                                name="image"
+                                                class="form-control @error('image') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                    @if(!empty($parentCategoriesEdit->image))
+                                    <div class="col-md-6">
+                                        <div class="mb-4">
+                                            <label class="form-label">Image<span class="text-danger">*</span></label>
+                                            <img src="{{ asset('storage/' . $parentCategoriesEdit->image) }}" alt="" width="100" height="100">
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label">Meta Title<span class="text-danger">*</span></label>
-                                    <input type="text" name="meta_title" class="form-control" placeholder="Meta Title">
+                                    <input type="text" name="meta_title" class="form-control" placeholder="Meta Title" value="{{ $parentCategoriesEdit->meta_title ?? '' }}">
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label">Meta Description<span class="text-danger">*</span></label>
-                                    <textarea type="text" name="meta_description" class="form-control" placeholder="Meta Description"></textarea>
+                                    <textarea type="text" name="meta_description" class="form-control" placeholder="Meta Description">{{ $parentCategoriesEdit->meta_description ?? '' }}</textarea>
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label">Meta Keyword<span class="text-danger">*</span></label>
-                                    <input type="text" name="meta_keywords" class="form-control" placeholder="Meta Keyword">
+                                    <input type="text" name="meta_keywords" class="form-control" placeholder="Meta Keyword" value="{{ $parentCategoriesEdit->meta_keywords ?? '' }}">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="submit" value="Submit" class="btn btn-primary">
+                                    <input type="submit" value="Update" class="btn btn-primary">
                                 </div>
                         </form>
                     </div>

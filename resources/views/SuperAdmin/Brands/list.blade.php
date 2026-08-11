@@ -4,7 +4,7 @@
 <main class="nxl-container">
     <div class="nxl-content">
         <!-- [ page-header ] start -->
-        @include('layouts.superadmin.breadcrumbs') 
+       @include('layouts.superadmin.breadcrumbs')
 
         <!-- [ page-header ] end -->
         <!-- [ Main Content ] start -->
@@ -24,29 +24,27 @@
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Category Name</th>
-                                            <th>Sub Category</th>
+                                            <th>Brands Name</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($categories as $key=>$list)
+                                        @forelse($brands as $key=>$list)
                                         <tr class="single-item">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <a href="javascript:void(0)" class="hstack gap-3">
                                                     <div class="avatar-image avatar-md">
-                                                        <img src="{{ asset('storage/' . $list->image) }}" alt=""
+                                                        <img src="{{ asset('storage/' . $list->logo) }}" alt=""
                                                             class="img-fluid">
                                                     </div>
                                                     <div>
                                                         <span
-                                                            class="text-truncate-1-line">{{$list->category_name}}</span>
+                                                            class="text-truncate-1-line">{{$list->brand_name}}</span>
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td>{{$list->parent->category_name ?? ''}}</td>
                                             <td>
                                                 @php
                                                 if($list->status == 1){
@@ -71,15 +69,15 @@
                                                     </div>
                                                     <div>
                                                         <a class="avatar-text avatar-md bg-soft-success text-success"
-                                                            href="{{ route('super.admin.edit',$list->id) }}">
+                                                            href="{{ route('super.admin.brand.edit',$list->id) }}">
                                                             <i class="feather feather-edit-3"></i>
                                                         </a>
                                                     </div>
                                                     <div>
-                                                        <form action="{{ route('super.admin.destroy',$list->id) }}"
+                                                        <form action="{{ route('super.admin.brand.destroy',$list->id) }}"
                                                             method="POST"
                                                             class="d-inline"
-                                                            onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                                            onsubmit="return confirm('Are you sure you want to delete this Brand?');">
 
                                                             @csrf
                                                             @method('DELETE')
@@ -128,7 +126,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Category Title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Brand Title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

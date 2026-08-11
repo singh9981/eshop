@@ -21,9 +21,11 @@ class SuperAdminCategoryController extends Controller
      */
     public function index(): View
     {
+        $module_name = 'Category';
+        $module_url = "super.admin.create";
         $categories = $this->categoryService->getAllCategories();
 
-        return view('SuperAdmin.Category.list', compact('categories'));
+        return view('SuperAdmin.Category.list', compact('categories','module_name','module_url'));
     }
 
     /**
@@ -31,9 +33,11 @@ class SuperAdminCategoryController extends Controller
      */
     public function create(): View
     {
+        $module_name = 'Category';
+        
         $parentCategories = $this->categoryService->getParentCategories();
 
-        return view('SuperAdmin.Category.create', compact('parentCategories'));
+        return view('SuperAdmin.Category.create', compact('parentCategories','module_name'));
     }
 
     /**
@@ -86,9 +90,10 @@ class SuperAdminCategoryController extends Controller
      */
     public function edit(Category $category): View
     {
+        $module_name = 'Category';
         $parentCategoriesEdit = $this->categoryService->getCategoryById($category->id);
         $parentCategories = $this->categoryService->getParentCategories();
-        return view('SuperAdmin.Category.edit', compact('category', 'parentCategoriesEdit', 'parentCategories'));
+        return view('SuperAdmin.Category.edit', compact('category', 'parentCategoriesEdit', 'parentCategories','module_name'));
     }
 
     /**
