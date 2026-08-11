@@ -1,5 +1,4 @@
-
-name: Deploy to Hostinger
+name: Deploy Laravel to Hostinger
 
 on:
   push:
@@ -11,15 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy via SSH
+      - name: Deploy to Hostinger
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
+
           script: |
-            cd ~/public_html/shop
+            cd ~/domains/yourdomain.com/public_html
+
             git pull origin main
-            composer install --no-interaction --prefer-dist --optimize-autoloader
+
+            composer install --no-dev --optimize-autoloader
+
+            php artisan migrate --force
+
+            php artisan config:clear
+            php artisan cache:clear
+            php artisan route:clear
+            php artisan view:clear
+
             php artisan optimize
