@@ -26,4 +26,10 @@ class Brand extends Model
         'status' => 'boolean',
         'sort_order' => 'integer',
     ];
+    public function products()
+    {
+        return $this->hasMany(
+            Product::class
+        );
+    }
 }

@@ -24,13 +24,14 @@
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Size Name</th>
+                                            <th>Website / URL</th>
+                                            <th>Total</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($sizes as $key=>$list)
+                                        @forelse($contact as $key=>$list)
                                         <tr class="single-item">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
@@ -38,13 +39,22 @@
                                                     
                                                     <div>
                                                         <span
-                                                            class="text-truncate-1-line">{{$list->size_name}}</span>
+                                                            class="text-truncate-1-line">{{$list->website ?? ''}}</span>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" class="hstack gap-3">
+                                                    
+                                                    <div>
+                                                        <span
+                                                            class="text-truncate-1-line">{{$contact->count() ?? ''}}</span>
                                                     </div>
                                                 </a>
                                             </td>
                                             <td>
                                                 @php
-                                                if($list->status == 1){
+                                                if($list->id == 1){
                                                 $activeOrDeactive = 'Active';
                                                 $class = 'success';
                                                 }else{

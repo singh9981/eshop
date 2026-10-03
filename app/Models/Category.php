@@ -64,4 +64,19 @@ class Category extends Model
     {
         return $query->whereNull('parent_id');
     }
+    public function products()
+    {
+        return $this->hasMany(
+            Product::class,
+            'category_id'
+        );
+    }
+
+    public function subcategoryProducts()
+    {
+        return $this->hasMany(
+            Product::class,
+            'subcategory_id'
+        );
+    }
 }

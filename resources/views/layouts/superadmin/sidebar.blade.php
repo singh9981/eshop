@@ -16,7 +16,7 @@
                     <a href="{{ route('super.admin.dashboard') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-airplay"></i></span>
                         <span class="nxl-mtext">Dashboards</span><span class="nxl-arrow"><i
-                                class="feather-chevron-right"></i></span>
+                                class="feather-chevron-right-test"></i></span>
                     </a>
                     <!-- <ul class="nxl-submenu">
                         <li class="nxl-item"><a class="nxl-link" href="index.html">CRM</a></li>
@@ -35,22 +35,58 @@
                         <li class="nxl-item"><a class="nxl-link" href="reports-timesheets.html">Timesheets Report</a></li>
                     </ul>
                 </li> -->
-                {{-- <li class="nxl-item nxl-hasmenu">
+                <li class="nxl-item nxl-hasmenu">
                     <a href="javascript:void(0);" class="nxl-link">
-                        <span class="nxl-micon"><i class="feather-database"></i></span>
-                        <span class="nxl-mtext">Category</span><span class="nxl-arrow"><i
+                        <span class="nxl-micon"><i class="feather-at-sign"></i></span>
+                        <span class="nxl-mtext">Product</span><span class="nxl-arrow"><i
                                 class="feather-chevron-right"></i></span>
                     </a>
                     <ul class="nxl-submenu">
-                        <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.category') }}">List</a>
+                        <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.product.index') }}">Product List</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-settings"></i></span>
+                        <span class="nxl-mtext">Settings</span><span class="nxl-arrow"><i
+                                class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <li class="nxl-item nxl-hasmenu">
+                            <a href="javascript:void(0);" class="nxl-link">
+                                <span class="nxl-micon"><i class="feather-database"></i></span>
+                                <span class="nxl-mtext">Ecommarce Module</span><span class="nxl-arrow"><i
+                                        class="feather-chevron-right"></i></span>
+                            </a>
+                            <ul class="nxl-submenu">
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('super.admin.category') }}">Category</a>
+                                </li>
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('super.admin.brand') }}">Brand</a>
+                                </li>
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('super.admin.size') }}">Sizes</a>
+                                </li>
+                                <!-- <li class="nxl-item"><a class="nxl-link" href="reports-timesheets.html">Timesheets Report</a></li> -->
+                            </ul>
                         </li>
-                        <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.create') }}">Create /
-                                Add</a></li>
-                        <!-- <li class="nxl-item"><a class="nxl-link" href="reports-project.html">View / Edit</a></li> -->
-                        <!-- <li class="nxl-item"><a class="nxl-link" href="reports-timesheets.html">Timesheets Report</a></li> -->
                     </ul>
                 </li>
                 <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('super.admin.contact') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-mail"></i></span>
+                        <span class="nxl-mtext">Contact List</span><span class="nxl-arrow"><i
+                                class="feather-chevron-right-test"></i></span>
+                    </a>
+                    <!-- <ul class="nxl-submenu">
+                        <li class="nxl-item"><a class="nxl-link" href="index.html">CRM</a></li>
+                        <li class="nxl-item"><a class="nxl-link" href="analytics.html">Analytics</a></li>
+                    </ul> -->
+                </li>
+                {{-- <li class="nxl-item nxl-hasmenu">
                     <a href="javascript:void(0);" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-at-sign"></i></span>
                         <span class="nxl-mtext">Brand</span><span class="nxl-arrow"><i
@@ -72,11 +108,12 @@
                     </a>
                     <ul class="nxl-submenu">
                         <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.size') }}">List</a></li>
-                        <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.size.create') }}">Create
+                        <li class="nxl-item"><a class="nxl-link"
+                                href="{{ route('super.admin.size.create') }}">Create
                                 / Edit</a></li>
                     </ul>
                 </li> --}}
-                <li class="nxl-item nxl-hasmenu">
+                {{-- <li class="nxl-item nxl-hasmenu">
                     <a href="javascript:void(0);" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-database"></i></span>
                         <span class="nxl-mtext">Products</span><span class="nxl-arrow"><i
@@ -103,8 +140,7 @@
                                         class="feather-chevron-right"></i></span>
                             </a>
                             <ul class="nxl-submenu">
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('super.admin.category') }}">Categories</a>
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('super.admin.category') }}">Categories</a>
                                 </li>
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('super.admin.brand') }}">Brands</a></li>
@@ -113,7 +149,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!--<li class="nxl-item nxl-hasmenu">
                     <a href="javascript:void(0);" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-at-sign"></i></span>

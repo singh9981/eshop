@@ -45,7 +45,7 @@ class SuperAdminSizeController extends Controller
             );
 
             return redirect()
-                ->route('super.admin.sizes.list')
+                ->route('super.admin.size')
                 ->with('success', 'Size created successfully.');
         } catch (Throwable $exception) {
             report($exception);

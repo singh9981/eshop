@@ -23,4 +23,19 @@ class Size extends Model
         'sort_order' => 'integer',
         'status' => 'boolean',
     ];
+    public function products()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'product_size'
+        )
+            ->withPivot([
+                'sku',
+                'price',
+                'discount_price',
+                'stock',
+                'status'
+            ])
+            ->withTimestamps();
+    }
 }
